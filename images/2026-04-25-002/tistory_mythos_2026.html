@@ -1,0 +1,288 @@
+<meta charset="UTF-8">
+<!--
+  카테고리: AI/최신뉴스
+  제목(안): "공개 거부" AI를 해커가 뚫었다 — Anthropic이 절대 못 푼다던 Claude Mythos의 충격 실체
+  발행일: 2026-04-25
+  소스: red.anthropic.com/2026/mythos-preview, euronews, securityweek, infoq
+-->
+
+<p style="font-size:13px;color:#a0aec0;margin-bottom:4px;">2026년 4월 25일</p>
+
+<!-- [이미지자리 1: 사이버보안 관련 이미지 w=350] -->
+<p align="center">
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-04-25-002/img1-cybersecurity-shield.png" alt="사이버보안 AI 이미지" width="350"/>
+</p>
+
+<p>"이 AI는 공개하면 안 됩니다."</p>
+<p>Anthropic이 직접 한 말입니다. 자기들이 만들어 놓고, 스스로 공개를 거부했습니다.<br>
+그런데 그 AI를, <strong>해커들이 먼저 손에 넣었습니다.</strong></p>
+<p>2026년 4월, 세상에서 가장 강력한 사이버보안 AI가 등장했습니다.<br>
+그리고 같은 달, 그 AI가 Discord 채널을 통해 무단 유출됐다는 사실이 밝혀졌습니다.</p>
+
+<hr>
+
+<div style="background:#fff5f5;border-left:5px solid #c53030;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#c53030;">⚠️ 이 글에서 확인할 충격 수치</p>
+<ul style="margin:0;padding-left:20px;line-height:2.0;">
+<li><strong>27년</strong> — Mythos가 단독으로 찾아낸 OpenBSD 운영체제 취약점의 나이</li>
+<li><strong>16년</strong> — FFmpeg 영상 처리 소프트웨어에서 발견된 버그의 연식</li>
+<li><strong>5백만 번</strong> — 기존 자동화 도구들이 FFmpeg 버그를 찾지 못한 채 지나친 테스트 횟수</li>
+<li><strong>4개</strong> — Mythos가 브라우저 해킹에 사용한 취약점 체인 개수 (샌드박스까지 탈출)</li>
+<li><strong>6개</strong> — Project Glasswing에 합류한 주요 금융·기술 기업 수 (Goldman Sachs, Apple 등)</li>
+<li><strong>0</strong> — 일반인이 Mythos에 접근할 수 있는 방법의 수</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>먼저, Anthropic이 뭔지 모르시는 분들을 위해</h2>
+
+<p>Anthropic(앤트로픽)은 미국의 AI 기업입니다. ChatGPT를 만든 OpenAI의 경쟁자 중 하나인데, 독특한 점이 있습니다.</p>
+
+<p>창업자들이 전직 OpenAI 연구자들이에요. 2021년에 "AI 안전성에 더 집중해야 한다"며 OpenAI를 집단 퇴사하고 세운 회사입니다.<br>
+한마디로, <span style="color:#3182ce;"><strong>"AI를 안전하게 만들자"</strong></span>를 사훈처럼 내걸고 시작한 곳이에요.</p>
+
+<p>이 회사가 만든 AI가 바로 <span style="color:#3182ce;"><strong>Claude(클로드)</strong></span>입니다. ChatGPT와 경쟁하는 AI 어시스턴트인데, 특히 코딩, 긴 문서 분석, 논리적 사고에서 강점을 보입니다. Amazon이 무려 <strong>25조 원(약 $25 billion)</strong>을 투자한 곳이기도 합니다.</p>
+
+<p>그 회사가, 자기들이 만든 AI를 <strong>세상에 공개하지 않겠다고 선언</strong>했습니다.</p>
+
+<hr>
+
+<h2>Claude Mythos — "공개 금지된 AI"의 탄생</h2>
+
+<!-- [이미지자리 2: AI + 자물쇠 or 위험 표시 이미지 w=350] -->
+<p align="center">
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-04-25-002/img2-ai-locked.png" alt="공개 금지된 AI 이미지" width="350"/>
+</p>
+
+<p>2026년 4월 7일, Anthropic은 새 모델을 발표했습니다. 이름은 <span style="color:#805ad5;"><strong>Claude Mythos Preview</strong></span>.</p>
+
+<p>그런데 발표 방식이 이상했습니다.<br>
+보통 새 AI 모델을 발표하면 "지금 써보세요!" 하고 링크를 공개합니다.<br>
+GPT는 그렇게 했고, Gemini도 그렇게 했고, 심지어 기존 Claude 버전들도 그렇게 했습니다.</p>
+
+<p>그런데 Mythos는 달랐습니다. Anthropic은 이렇게 말했습니다.</p>
+
+<div style="background:#faf5ff;border-left:5px solid #805ad5;padding:16px 20px;margin:20px 0;border-radius:4px;font-style:italic;">
+<p style="margin:0;line-height:1.9;">"Mythos의 능력은 현재 일반 공개에 적합하지 않습니다. 단기적으로, 이 AI가 공격자의 손에 넘어간다면, 방어자들이 막을 수 없을 정도로 빠르고 정교한 사이버 공격이 가능해집니다."</p>
+<p style="margin:8px 0 0;font-weight:bold;color:#805ad5;">— Anthropic 공식 발표</p>
+</div>
+
+<p>자기들이 만든 AI가 너무 강력해서, <strong>스스로 공개를 거부한 겁니다.</strong></p>
+
+<p>AI 회사가 신제품 출시를 스스로 막은 건 사실상 전례가 없는 일입니다. 도대체 이 AI가 뭘 할 수 있길래 이런 결정을 내린 걸까요?</p>
+
+<hr>
+
+<h2>27년 된 버그를 30분 만에 찾아낸 AI</h2>
+
+<p>Anthropic이 공개한 테스트 결과는 솔직히 좀 무섭습니다.</p>
+
+<p>Mythos는 <span style="color:#c53030;"><strong>모든 주요 운영체제(OS)와 모든 주요 브라우저에서 제로데이 취약점을 찾아냈습니다.</strong></span></p>
+
+<p>여기서 잠깐, 용어 설명을 드려야겠어요.</p>
+
+<div style="background:#ebf8ff;border:1px solid #3182ce;padding:16px 20px;margin:20px 0;border-radius:6px;">
+<p style="margin:0 0 8px;font-weight:bold;color:#2b6cb0;">📖 알아두면 좋은 보안 용어</p>
+<ul style="margin:0;padding-left:20px;line-height:2.0;">
+<li><strong>취약점(Vulnerability)</strong>: 소프트웨어의 허점. 해커가 이걸 통해 침입합니다.</li>
+<li><strong>제로데이(Zero-day)</strong>: 아직 아무도 발견하지 못한 취약점. 패치(수정)가 없어서 무조건 뚫립니다.</li>
+<li><strong>N-day</strong>: 이미 알려진 취약점. 패치는 있지만 업데이트 안 한 시스템은 여전히 위험합니다.</li>
+<li><strong>익스플로잇(Exploit)</strong>: 취약점을 실제 공격에 활용하는 코드나 방법.</li>
+</ul>
+</div>
+
+<p>Mythos가 발견한 구체적인 사례들을 보겠습니다.</p>
+
+<h3>① 27년 된 OpenBSD 버그</h3>
+
+<p>OpenBSD는 전 세계 서버, 방화벽, 보안 장비에서 가장 널리 쓰이는 운영체제 중 하나입니다. "보안이 극도로 철저하다"는 것으로 유명해요.</p>
+
+<p>Mythos는 이 운영체제의 <span style="color:#c53030;"><strong>TCP SACK(패킷 처리 방식)에 숨겨진 부호 있는 정수 오버플로우 버그를 발견했습니다.</strong></span> 이 버그는 무려 27년 동안 아무도 찾지 못한 채 숨어 있었습니다.</p>
+
+<p>27년이면 Anthropic 창업자들이 초등학교 다닐 때부터 있던 버그입니다.</p>
+
+<h3>② 5백만 번의 테스트를 통과한 FFmpeg 버그</h3>
+
+<p>FFmpeg는 여러분이 유튜브, 넷플릭스, 카카오톡 영상을 볼 때 뒤에서 돌아가는 소프트웨어입니다. 거의 모든 영상 처리에 쓰이죠.</p>
+
+<p>여기서 H.264 코덱(동영상 압축 방식)에 16년 된 취약점이 있었습니다. 기존의 자동화 테스트 도구들이 <strong>5백만 번</strong>이나 이 코드를 검사했지만 아무도 발견하지 못했어요.</p>
+
+<p>Mythos가 찾아냈습니다.</p>
+
+<h3>③ 브라우저 샌드박스 탈출 — 4개 취약점 연쇄 공격</h3>
+
+<p>이건 좀 더 무섭습니다. Mythos는 브라우저 해킹 코드를 직접 작성했는데, <strong>취약점 4개를 연달아 이어 붙인 복합 공격</strong>이었습니다.</p>
+
+<p>브라우저에는 '샌드박스'라는 안전 구역이 있습니다. 설령 악성코드가 브라우저 안으로 들어와도 컴퓨터 전체를 건드리지 못하도록 격리하는 장치예요. 현대 보안 설계의 핵심입니다.</p>
+
+<p>Mythos는 이 샌드박스를 <span style="color:#c53030;"><strong>뚫었습니다.</strong></span> 브라우저를 탈출해서 컴퓨터 운영체제 전체에 접근할 수 있는 코드를 스스로 작성한 거예요.</p>
+
+<blockquote style="border-left:4px solid #718096;padding:0 16px;margin:20px 0;color:#4a5568;font-style:italic;">
+"Mythos Preview는 렌더러(renderer)와 OS 샌드박스를 모두 탈출하는 복잡한 JIT 힙 스프레이를 활용한 웹 브라우저 익스플로잇을 작성했습니다."<br>
+<span style="font-style:normal;font-size:0.9em;">— Anthropic 기술 발표</span>
+</blockquote>
+
+<p>이 내용을 비전문가 언어로 바꾸면 이렇습니다: <strong>"AI가 스스로 해킹 코드를 작성했고, 그 코드는 실제로 작동했습니다."</strong></p>
+
+<hr>
+
+<h2>Project Glasswing — 일부에게만 허락된 AI</h2>
+
+<p>Anthropic은 Mythos를 완전히 봉인하지는 않았습니다. 대신 <span style="color:#3182ce;"><strong>Project Glasswing</strong></span>이라는 프로그램을 만들었어요.</p>
+
+<p>"공격에 악용될 수 있는 AI지만, 방어에도 사용할 수 있다. 그러니 신뢰할 수 있는 기관들한테만 주겠다" — 이게 핵심입니다.</p>
+
+<p>Project Glasswing에 합류한 기관들은 이렇습니다:</p>
+
+<div style="background:#e6fffa;border:1px solid #319795;padding:16px 20px;margin:20px 0;border-radius:6px;">
+<p style="margin:0 0 8px;font-weight:bold;color:#2c7a7b;">🏛️ Glasswing 파트너 (공개된 것만)</p>
+<ul style="margin:0;padding-left:20px;line-height:2.0;">
+<li><strong>금융</strong>: Goldman Sachs, JP Morgan Chase, Citigroup, Bank of America</li>
+<li><strong>기술</strong>: Amazon, Apple, Microsoft</li>
+<li><strong>보안</strong>: CrowdStrike</li>
+<li><strong>기타</strong>: 오픈소스 개발자 일부 (심사 후 제한 접근)</li>
+</ul>
+</div>
+
+<p>이 명단을 보면 공통점이 있습니다. <strong>전 세계 금융 인프라와 기술 인프라의 핵심</strong>을 담당하는 기관들입니다.</p>
+
+<p>Microsoft의 AI 보안 책임자 <span style="color:#805ad5;"><strong>Igor Tsyganskiy</strong></span>는 이렇게 말했습니다:</p>
+
+<blockquote style="border-left:4px solid #718096;padding:0 16px;margin:20px 0;color:#4a5568;font-style:italic;">
+"위험을 일찍 파악하고 완화해야 합니다. 공격자들이 이 기술을 가지기 전에 우리가 먼저 취약점을 찾고 닫아야 합니다."
+</blockquote>
+
+<p>CrowdStrike의 <span style="color:#805ad5;"><strong>Elia Zaitsev</strong></span>도 합류 이유를 밝혔습니다:</p>
+
+<blockquote style="border-left:4px solid #718096;padding:0 16px;margin:20px 0;color:#4a5568;font-style:italic;">
+"AI를 배포하려면 보안이 필요합니다. 그래서 우리는 처음부터 이 프로젝트에 참여했습니다."
+</blockquote>
+
+<p>논리는 이해됩니다. 해커들도 AI를 쓸 것이니, 방어자도 같은 수준의 AI가 있어야 한다는 거죠.</p>
+
+<p>하지만 이 프로젝트가 발표된 지 2주도 안 됐을 때, 예상치 못한 일이 벌어졌습니다.</p>
+
+<hr>
+
+<h2>"공개 거부" AI를 해커가 먼저 손에 넣었다</h2>
+
+<!-- [이미지자리 3: 해킹 or 디스코드 채널 관련 이미지 w=350] -->
+<p align="center">
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-04-25-002/img3-hacker-breach.png" alt="해킹 유출 이미지" width="350"/>
+</p>
+
+<p>2026년 4월 22일, 블룸버그 보도가 나왔습니다.</p>
+
+<p><span style="color:#c53030;"><strong>Discord의 한 비공개 채널에서 운영되는 그룹이 Mythos에 무단으로 접근하는 데 성공했다는 내용이었습니다.</strong></span></p>
+
+<p>어떻게 뚫렸을까요?</p>
+
+<p>Anthropic의 시스템이 직접 해킹된 건 아니었습니다. 문제는 <strong>제3자 벤더(외부 협력사)</strong>의 환경이었어요. Mythos를 테스트하기 위해 접근을 허가한 외부 회사의 시스템이 뚫렸고, 그 경로를 통해 비인가 사용자들이 모델에 접근했습니다.</p>
+
+<p>해당 Discord 그룹은 "아직 공개되지 않은 AI 모델"에 접근하는 것에 특화된 집단으로, 여러 전략을 시도한 끝에 결국 Mythos에 접근하는 데 성공했다고 전해집니다. 그리고 이후 수 주간 <strong>정기적으로</strong> 이 모델을 사용했습니다.</p>
+
+<p>Anthropic은 이렇게 발표했습니다:</p>
+
+<blockquote style="border-left:4px solid #718096;padding:0 16px;margin:20px 0;color:#4a5568;font-style:italic;">
+"제3자 벤더 환경을 통한 Claude Mythos 무단 접근 보고를 조사하고 있습니다. 현재까지 Anthropic의 자체 시스템이 침해됐다는 증거는 없습니다."
+</blockquote>
+
+<p>쉽게 말하면 이렇습니다: <strong>"우리 집은 안 뚫렸는데, 우리 집 열쇠를 맡겨놓은 이웃집이 뚫렸습니다."</strong></p>
+
+<p>아이러니합니다. "공개하면 위험하다"며 봉인한 AI가, 공개도 안 된 상태에서 비인가 사용자들 손에 들어간 겁니다.</p>
+
+<div style="background:#fef5e7;border-left:5px solid #dd6b20;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-weight:bold;color:#dd6b20;">💡 현직쌤 생각</p>
+<p style="margin:0;line-height:1.9;">이 사건은 "강력한 AI를 통제할 수 있는가"라는 질문을 던집니다. Anthropic이 아무리 조심해도, 그 AI를 다루는 모든 협력사까지 완벽하게 보안을 유지하기는 사실상 불가능에 가깝습니다. 핵무기 확산 방지 조약처럼, AI 통제도 결국 국제적 협약이 필요한 문제가 될 수 있다는 전문가 의견도 나오고 있어요.</p>
+</div>
+
+<hr>
+
+<h2>그래서 우리는 뭘 알아야 하나</h2>
+
+<p>보안 전문가가 아닌 일반인 입장에서, 이 사건이 주는 시사점을 정리해봤습니다.</p>
+
+<h3>1. 이미 사이버 공격의 지형이 바뀌고 있다</h3>
+
+<p>Anthropic은 2025년에 이미 AI를 이용한 간첩 작전을 탐지한 사례가 있다고 밝혔습니다. 해커들이 <span style="color:#c53030;"><strong>AI를 활용해 직접 사이버 공격을 실행</strong></span>한 사례입니다. Mythos 수준이 아니더라도, 현재의 AI 모델들이 이미 공격 도구로 쓰이고 있다는 뜻이에요.</p>
+
+<h3>2. "패치 속도"가 생존의 관건</h3>
+
+<p>Anthropic은 기업들에게 이렇게 권고합니다: <strong>"패치 주기를 획기적으로 단축하라."</strong></p>
+
+<p>예전에는 취약점이 발견되면 악성 익스플로잇 코드가 만들어지기까지 며칠에서 몇 주가 걸렸습니다. Mythos 같은 AI가 있으면 그 시간이 <span style="color:#c53030;"><strong>몇 시간으로 줄어들 수 있습니다.</strong></span></p>
+
+<p>"나는 업무용 PC인데 괜찮겠지" 싶으신 분들, 윈도우 업데이트 알림 무시하는 습관은 이제 정말 위험합니다.</p>
+
+<h3>3. AI 안전 논의가 더 이상 먼 나라 얘기가 아니다</h3>
+
+<p>Anthropic은 "AI 안전성을 중시하는 회사"로 유명합니다. 그 회사가 만든 AI조차 <strong>제3자 경로로 유출됐습니다.</strong></p>
+
+<p>이건 OpenAI나 Google이 비슷한 수준의 AI를 만들었을 때도 똑같이 벌어질 수 있는 일입니다. 아니, 더 조심성 없는 회사가 만든다면 더 쉽게 유출될 수 있죠.</p>
+
+<hr>
+
+<h2>현직쌤의 한 줄 정리</h2>
+
+<div style="background:#f7fafc;border:1px solid #e2e8f0;padding:20px 24px;margin:24px 0;border-radius:8px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead>
+<tr style="background:#edf2f7;">
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #cbd5e0;">항목</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #cbd5e0;">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #e2e8f0;">
+<td style="padding:10px 12px;font-weight:bold;">모델 이름</td>
+<td style="padding:10px 12px;">Claude Mythos Preview (클로드 미토스 프리뷰)</td>
+</tr>
+<tr style="background:#f7fafc;border-bottom:1px solid #e2e8f0;">
+<td style="padding:10px 12px;font-weight:bold;">공개 날짜</td>
+<td style="padding:10px 12px;">2026년 4월 7일 (일반 공개 없음)</td>
+</tr>
+<tr style="border-bottom:1px solid #e2e8f0;">
+<td style="padding:10px 12px;font-weight:bold;">핵심 능력</td>
+<td style="padding:10px 12px;">제로데이 취약점 자율 발견·익스플로잇 코드 자동 작성</td>
+</tr>
+<tr style="background:#f7fafc;border-bottom:1px solid #e2e8f0;">
+<td style="padding:10px 12px;font-weight:bold;">왜 공개 안 하나</td>
+<td style="padding:10px 12px;">공격자가 쓰면 현재의 방어 체계로 막을 수 없음</td>
+</tr>
+<tr style="border-bottom:1px solid #e2e8f0;">
+<td style="padding:10px 12px;font-weight:bold;">허가된 사용자</td>
+<td style="padding:10px 12px;">Goldman Sachs, Apple, Amazon, CrowdStrike 등 (Project Glasswing)</td>
+</tr>
+<tr style="background:#f7fafc;border-bottom:1px solid #e2e8f0;">
+<td style="padding:10px 12px;font-weight:bold;">유출 경위</td>
+<td style="padding:10px 12px;">제3자 벤더 환경이 Discord 그룹에 의해 무단 접근됨</td>
+</tr>
+<tr>
+<td style="padding:10px 12px;font-weight:bold;">Anthropic 입장</td>
+<td style="padding:10px 12px;">자사 시스템 침해는 없음, 조사 중</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>AI가 인간보다 더 빠르게, 더 깊이 시스템의 약점을 찾는 시대가 왔습니다.</p>
+
+<p>좋은 쪽으로 쓰이면 27년 된 버그를 우리가 찾기 전에 미리 막아줄 수 있습니다.<br>
+나쁜 쪽으로 쓰이면, 그 27년 된 버그가 세계 최대 은행의 전산망을 무너뜨리는 데 쓰일 수 있습니다.</p>
+
+<p>Anthropic이 가장 잘 만든 AI를 스스로 봉인한 이유, 이제 이해되시나요?</p>
+
+<p>그리고 그 봉인된 AI가 이미 누군가의 손에 들어갔다는 사실이,<br>
+<span style="color:#c53030;"><strong>이 이야기를 아직 끝나지 않은 것으로 만들고 있습니다.</strong></span></p>
+
+<hr>
+
+<p style="font-size:13px;color:#718096;">
+참고 출처:<br>
+・ Anthropic — <em>Claude Mythos Preview</em> (red.anthropic.com)<br>
+・ Euronews Next — <em>Hackers breach Anthropic's 'too dangerous to release' Mythos AI model</em> (2026.04.22)<br>
+・ SecurityWeek — <em>Anthropic Unveils Claude Mythos: A Cybersecurity Breakthrough</em><br>
+・ Foreign Policy — <em>Anthropic's Mythos Moment: How Frontier AI Is Redefining Cybersecurity</em><br>
+・ InfoQ — <em>Anthropic Releases Claude Mythos Preview with Cybersecurity Capabilities</em>
+</p>

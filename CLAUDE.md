@@ -5,6 +5,37 @@
 
 ---
 
+## 🎯 블로그 핵심 미션
+
+**"Claude 공식 발표는 영어고, 스레드는 너무 혼잡해 — 그걸 이해 쉽게, 친근하게 전달한다"**
+
+- **역할**: 흩어진 영어 원문과 혼잡한 스레드를 한국어 독자가 바로 이해할 수 있도록 정리·번역·해석
+- **톤**: 전문 용어를 쓰되 쉽게 풀어서. 딱딱하지 않게, 친근하게
+
+---
+
+## 📰 글감 발굴 워크플로우 (매 글 작성 전 필수)
+
+### 1단계 — 스레드 인기글 먼저 읽기 (최우선)
+- `https://www.threads.com/@choi.openai` 최신 글 훑기
+- 좋아요/댓글/리포스트 많은 글이 주제 후보
+- 스레드는 "사람들이 지금 뭘 궁금해하는지"를 보여주는 온도계
+
+### 2단계 — 최우선 소재 체크
+1. **Claude 공식 발표** (red.anthropic.com, anthropic.com/news)
+2. **Claude 관련 X(구 트위터) 인기 포스트**
+3. 위 두 곳에서 소재가 없을 때만 → TechCrunch, VentureBeat, The Verge 등 테크 미디어
+
+### 3단계 — 중복 체크
+- `blog writings/` 폴더의 기존 HTML 파일 확인
+- 이미 쓴 주제는 건너뜀
+
+### 4단계 — 소재 확정 후 원문 읽기
+- 공식 발표 원문 WebFetch로 직접 읽기
+- 스레드 원문 WebFetch로 읽고 핵심 수치·인용 확인
+
+---
+
 ## 👤 사용자 기본 정보
 
 - 블로그 화자: **"현직쌤"**
@@ -58,23 +89,22 @@
 
 ---
 
-## 🖼 이미지 — Canva MCP 사용 (기본)
+## 🖼 이미지 — Pencil MCP 사용 (기본)
 
 - **본문 이미지는 3장** — 상단/중간/하단. 나머지는 SVG로 대체
-- **구성**: 실사 사진 1~2장 + Canva 1~2장 혼합
-- 실사 사진 검색과 Canva 생성은 **항상 병렬로** 동시 실행
-  - image-finder-svg 에이전트 → 실사 사진 1~2장 검색
-  - Canva MCP → 디자인 이미지 1~2장 생성
-  - 두 작업을 같은 메시지에서 동시에 호출할 것
-- **Canva 텍스트는 영어로** — 한글 폰트가 어색하므로 영어로 작성
+- **Pencil MCP로 3장 AI 생성** (사용자 지시: 2026-04-25)
+  1. Pencil.app이 실행 중인지 확인 (안 되어 있으면 `open /Applications/Pencil.app` 알려주기)
+  2. `get_editor_state` → `find_empty_space_on_canvas`
+  3. 프레임 생성 후 `G(frameId, "ai", "프롬프트")` 로 이미지 생성
+  4. `get_screenshot` 으로 결과 확인
+  5. `export_nodes` → `images/YYYY-MM-DD-{글번호}/` 폴더로 내보내기
 - **이미지 width: 350px** (HTML `width="350"`)
-- `generate-design` 후 Claude가 **직접 1개 선택**, 사용자에게 고르라고 하지 말 것
-- 선택한 Canva 디자인은 playwright로 내부 확인만 하고 **사용자에게 스크린샷 띄우지 말 것**
-- 템플릿 잔여 텍스트(날짜, 주소, 웹사이트 등)는 editing transaction으로 자동 삭제 후 commit
-- 이미지 폴더 구조: `images/YYYY-MM-DD-{글번호}/img1.png` 형식
-  - 예: `images/2026-04-25-001/img1-human-ai.png`
+- 폴더 구조: **HTML 파일 + 이미지를 같은 폴더에** (사용자 지시: 2026-04-25)
+  - `images/YYYY-MM-DD-{글번호}/tistory_글이름.html`
+  - `images/YYYY-MM-DD-{글번호}/img1-설명.png`
+  - 예: `images/2026-04-25-002/tistory_mythos_2026.html`
 - GitHub raw URL로 HTML에 삽입: `https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/YYYY-MM-DD-{글번호}/{파일명}.png`
-- 사용자 Canva 계정: **Pro**
+- **글 상단에 발행일 표시** — `<p style="font-size:13px;color:#a0aec0;">YYYY년 M월 D일</p>`
 
 ---
 
@@ -101,5 +131,15 @@
 4. **단계별로 나눠서** 설명
 
 ---
+
+---
+
+## 📰 발행된 글 목록
+
+| 파일명 | 주제 | 발행일 |
+|---|---|---|
+| tistory_claude_controversy_2026.html | Claude Code 성능 저하 논란 + Anthropic 사과 | 2026-04-25 |
+| tistory_colleague_skill_2026.html | Claude Code colleague 스킬 소개 | 2026-04-25 |
+| images/2026-04-25-002/tistory_mythos_2026.html | Claude Mythos 공개금지 AI + 해킹 유출 사건 | 2026-04-25 |
 
 *마지막 업데이트: 2026-04-25*
