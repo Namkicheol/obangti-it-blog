@@ -65,6 +65,9 @@
 - 선택한 디자인은 playwright로 **navigate → take_screenshot** 순서로 바로 보여줄 것
 - 템플릿 잔여 텍스트(날짜, 주소, 웹사이트 등)는 editing transaction으로 자동 삭제 후 commit
 - 사용자 Canva 계정: **Pro**
+- **본문 이미지는 3장** — 상단/중간/하단 배치. 나머지는 SVG로 대체
+- 이미지는 GitHub raw URL로 HTML에 삽입: `https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/{폴더}/{파일명}.png`
+- 이미지 width는 500px 기준
 
 ---
 
