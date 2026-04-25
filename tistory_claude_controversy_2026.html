@@ -1,0 +1,252 @@
+<meta charset="UTF-8">
+<!--
+  카테고리: AI/최신뉴스
+  제목(안): 클로드가 일부러 멍청해졌다? Anthropic이 직접 인정한 충격 사실
+  길이 목표: 10,000~12,000자
+  이미지: Pexels w=350
+-->
+
+<p align="center">
+<img src="https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?w=350" alt="인공지능 AI 일러스트" width="350"/>
+</p>
+
+<p>갑자기 클로드(Claude)가 이상해졌다는 말, 들어보셨나요?</p>
+<p>수십만 명의 개발자가 "예전의 클로드가 아니다"라며 분노했고,<br>
+결국 Anthropic(앤트로픽) 측이 <strong>"우리가 잘못했습니다"</strong>라고 공식 인정했습니다.</p>
+<p>이건 단순한 버그가 아니었습니다. <strong>회사가 의도적으로 바꾼 것</strong>이었습니다.</p>
+
+<hr>
+
+<div style="background:#fff5f5;border-left:5px solid #c53030;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#c53030;">⚠️ 이 글에서 확인할 충격 수치</p>
+<ul style="margin:0;padding-left:20px;line-height:1.9;">
+<li><strong>6,852개</strong> — AMD 엔지니어팀이 분석한 클로드 세션 수</li>
+<li><strong>234,760개</strong> — 그 안에서 기록된 도구 호출 횟수</li>
+<li><strong>3가지</strong> — Anthropic이 인정한 성능 저하 원인 변경사항 수</li>
+<li><strong>2%</strong> — Claude Code 접근이 차단된 Pro 신규 구독자 비율 (테스트 명목)</li>
+<li><strong>271개</strong> — Anthropic 신모델 Mythos가 Firefox에서 발견한 보안 취약점 수</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>클로드(Claude)가 뭔지 모르시는 분들을 위해</h2>
+
+<p align="center">
+<img src="https://images.pexels.com/photos/30530409/pexels-photo-30530409.jpeg?w=350" alt="AI 챗봇 인터페이스" width="350"/>
+</p>
+
+<p>클로드는 Anthropic이 만든 AI 어시스턴트입니다. ChatGPT의 경쟁자라고 보시면 됩니다.<br>
+특히 <strong>코딩</strong>과 <strong>긴 글 작성</strong>, <strong>논리적 분석</strong>에서 GPT-4를 능가한다는 평가를 받으며 전 세계 개발자들 사이에서 엄청난 인기를 끌었습니다.</p>
+
+<p>그 중에서도 <span style="color:#3182ce;"><strong>Claude Code</strong></span>(클로드 코드)는 개발자들이 코딩 작업을 맡기는 AI 에이전트로, "이제 주니어 개발자 필요 없겠다"는 말이 나올 정도로 파괴적인 성능을 자랑했습니다.</p>
+
+<p>그런데 2026년 3월부터 이상한 일이 벌어지기 시작했습니다.</p>
+
+<hr>
+
+<h2>"내가 쓰던 클로드가 아니다" — 개발자들의 폭발</h2>
+
+<p align="center">
+<img src="https://images.pexels.com/photos/52608/pexels-photo-52608.jpeg?w=350" alt="스트레스 받는 개발자" width="350"/>
+</p>
+
+<p>Reddit, X(구 트위터), GitHub 이슈 탭, 그리고 스레드(Threads)까지.<br>
+2026년 3월 말부터 <strong>"클로드가 바보가 됐다"</strong>는 글이 폭발적으로 쏟아지기 시작했습니다.</p>
+
+<p>구체적인 불만은 이렇습니다:</p>
+
+<ul style="line-height:2.0;">
+<li>분명히 해달라고 한 것을 <strong>중간에 멈추거나 건너뛴다</strong></li>
+<li>전에는 한 번에 했던 복잡한 작업을 <strong>이제는 못하겠다고 한다</strong></li>
+<li>지시를 무시하거나 <strong>스스로 단순화해서 처리한다</strong></li>
+<li>예전에는 완벽했던 코드에 <strong>이상한 실수가 섞여 나온다</strong></li>
+</ul>
+
+<p>처음에는 단순한 일시적 오류라고 생각했습니다.<br>
+하지만 <strong>몇 주가 지나도 나아지지 않았고</strong>, 오히려 더 심해지는 것 같다는 제보까지 나왔습니다.</p>
+
+<p>그러던 중 충격적인 분석 결과가 등장합니다.</p>
+
+<hr>
+
+<h2>AMD 엔지니어의 6,852개 세션 분석 — 숫자로 증명된 저하</h2>
+
+<p align="center">
+<img src="https://images.pexels.com/photos/9301837/pexels-photo-9301837.jpeg?w=350" alt="성능 하락 그래프" width="350"/>
+</p>
+
+<p>AMD(세계적인 반도체 기업)의 AI 그룹 디렉터 <span style="color:#3182ce;"><strong>Stella Laurenzo</strong></span>는 단순한 주관적 불만이 아닌, <strong>데이터 기반의 냉정한 분석 결과</strong>를 공개했습니다.</p>
+
+<div style="background:#ebf8ff;border:1px solid #3182ce;padding:16px 20px;margin:20px 0;border-radius:6px;">
+<p style="margin:0 0 6px;font-weight:bold;color:#2b6cb0;">📊 Stella Laurenzo 분석 데이터</p>
+<ul style="margin:0;padding-left:20px;line-height:1.9;">
+<li>분석 기간: 수개월간의 팀 실무 로그</li>
+<li>총 Claude Code 세션: <strong>6,852개</strong></li>
+<li>도구 호출 횟수: <strong>234,760회</strong></li>
+<li>사고 블록(thinking blocks): <strong>17,871개</strong></li>
+</ul>
+</div>
+
+<p>이 방대한 데이터를 분석한 결론은 단 한 줄이었습니다.</p>
+
+<blockquote style="border-left:4px solid #c53030;padding:12px 16px;margin:20px 0;background:#fff5f5;font-style:italic;color:#c53030;">
+"<strong>Claude cannot be trusted to perform complex engineering tasks.</strong>"<br>
+<span style="font-size:13px;color:#666;">(클로드는 복잡한 엔지니어링 작업을 수행하는 데 신뢰할 수 없다.)</span>
+</blockquote>
+
+<p>AMD 같은 세계적인 기업의 AI 팀 디렉터가 수개월치 실무 데이터를 근거로 내린 결론입니다.<br>
+이 발언이 공개되자 커뮤니티는 발칵 뒤집혔습니다.</p>
+
+<hr>
+
+<h2>Anthropic의 충격 인정 — "우리가 잘못했습니다"</h2>
+
+<p align="center">
+<img src="https://images.pexels.com/photos/5052053/pexels-photo-5052053.jpeg?w=350" alt="빨간 경고등" width="350"/>
+</p>
+
+<p>수많은 사용자들의 항의와 데이터 기반 비판이 쏟아지자, Anthropic은 결국 <strong>공식 조사 결과를 발표</strong>했습니다.</p>
+
+<p>그 내용은 충격적이었습니다.</p>
+
+<div style="background:#fff5f5;border-left:5px solid #c53030;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#c53030;">⚠️ Anthropic이 인정한 3가지 변경사항</p>
+<ol style="margin:0;padding-left:20px;line-height:2.0;">
+<li>2026년 3월 ~ 4월 사이에 <strong>3가지 별도 변경사항</strong>이 적용됨</li>
+<li>그 변경사항들이 <strong>Claude Code, Claude Agent SDK, Claude Cowork</strong> 사용자 경험을 악화시킴</li>
+<li>핵심 원인: <strong>Claude Code의 기본값을 "중간 노력(medium effort)"으로 낮춤</strong></li>
+</ol>
+</div>
+
+<p>세 번째 항목이 핵심입니다.</p>
+
+<p>Anthropic은 "<strong>토큰 소비에 대한 사용자 피드백을 반영해서</strong> 기본 노력 수준을 낮췄다"고 해명했습니다.<br>
+간단히 말하면, <strong>"AI가 너무 많이 생각하면 비용이 많이 드니까 덜 생각하도록 바꿨다"</strong>는 얘기입니다.</p>
+
+<p>그리고 이 변경이 외부에 <strong>공개되지 않은 채 조용히 적용</strong>됐습니다.</p>
+
+> 💡 <span style="color:#dd6b20;"><strong>현직쌤 팁</strong></span>: AI 서비스는 우리가 모르는 사이에 조용히 업데이트됩니다. "갑자기 이상하다" 싶으면 커뮤니티 반응을 먼저 확인하세요. Reddit r/ClaudeAI, Threads, X에서 빠르게 공유됩니다.
+
+<hr>
+
+<h2>Reddit · 스레드의 반응 — "오픈AI 마케팅 아닌가?"</h2>
+
+<p align="center">
+<img src="https://images.pexels.com/photos/15406294/pexels-photo-15406294.jpeg?w=350" alt="소셜 미디어 앱" width="350"/>
+</p>
+
+<p>스레드(Threads)에서는 흥미로운 반응도 나왔습니다.<br>
+한 사용자(@that.map.guy.craig)는 이렇게 말했습니다:</p>
+
+<blockquote style="border-left:4px solid #805ad5;padding:12px 16px;margin:20px 0;background:#faf5ff;font-style:italic;">
+"Reddit, Threads, 주변 지인들에게서 Claude Code 성능 저하 불만이 쏟아지는 걸 보고 있습니다.<br>
+저는 아무것도 못 느꼈는데… <strong>혹시 OpenAI 게릴라 마케팅 아닌가 싶었습니다.</strong><br>
+하지만 신뢰하는 사람들에게서도 같은 말을 들으니 그냥 넘기기 어렵네요."
+</blockquote>
+
+<p>누군가는 성능 저하를 전혀 못 느꼈고, 누군가는 확연히 체감했습니다.<br>
+이 차이는 어디서 오는 걸까요?</p>
+
+<p>전문가들의 분석에 따르면, <strong>단순·반복 작업</strong>에서는 차이가 크지 않지만, <strong>복잡한 멀티스텝 코딩이나 긴 맥락이 필요한 작업</strong>에서 성능 저하가 두드러진다고 합니다.<br>
+즉, 클로드를 가볍게 쓰는 사람들은 못 느끼고, 헤비유저들이 직격탄을 맞은 것입니다.</p>
+
+<hr>
+
+<h2>설상가상 — Claude Code를 유료 구독에서 빼버렸다</h2>
+
+<p>성능 저하 논란이 채 가라앉기도 전에, Anthropic은 또 다른 폭탄을 터뜨렸습니다.</p>
+
+<p><span style="color:#c53030;"><strong>Claude Code를 Pro 구독($20/월)에서 제거한 것입니다.</strong></span></p>
+
+<p>정확히는 신규 Pro 구독자 중 약 <strong>2%</strong>에 대해 Claude Code 접근을 차단하는 테스트를 진행했습니다.<br>
+기존 구독자와 Max 플랜 구독자는 영향 없다고 밝혔지만, 커뮤니티는 즉시 반발했습니다.</p>
+
+<div style="background:#fef5e7;border-left:5px solid #dd6b20;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#dd6b20;">💡 이게 왜 문제인가요?</p>
+<p style="margin:0;line-height:1.8;">Claude Code는 Pro 구독의 핵심 기능입니다. 많은 개발자들이 <strong>"Claude Code 쓰려고 Pro 결제한다"</strong>고 말할 정도입니다. 이걸 아무 예고 없이, 테스트 명목으로 일부 사용자에게서 빼는 건 구독 서비스에 대한 신뢰를 흔드는 행위입니다. 기술 미디어 The Register는 이를 <strong>"paying customers being treated as lab rats"</strong>(유료 고객을 실험용 쥐로 쓰는 것)이라고 비판했습니다.</p>
+</div>
+
+<hr>
+
+<h2>그뿐만이 아니다 — Reddit vs. Anthropic 소송까지</h2>
+
+<p>혼란이 가중되는 가운데, 법적 이슈도 터졌습니다.</p>
+
+<p><span style="color:#3182ce;"><strong>Reddit이 Anthropic을 상대로 소송을 제기했습니다.</strong></span></p>
+
+<p>Reddit의 주장은 이렇습니다: Anthropic이 수십억 개에 달하는 Reddit 게시글과 댓글을 <strong>허락 없이 크롤링(수집)해서 Claude 훈련에 사용했다</strong>는 것입니다.</p>
+
+<p>이는 AI 업계 전반의 고질적인 문제입니다. OpenAI, Google, Meta 모두 유사한 저작권 논란에 휘말려 있습니다. 하지만 Reddit 입장에서는 <strong>플랫폼의 핵심 자산인 사용자 생성 콘텐츠</strong>가 무단 수집됐다는 점에서 좌시할 수 없었을 것입니다.</p>
+
+<p>소송 결과에 따라 AI 훈련 데이터 수집 관행 전체가 흔들릴 수 있어, 업계가 주목하고 있습니다.</p>
+
+<hr>
+
+<h2>반전 — 새 모델 Mythos, 보안 연구에서 271개 취약점 발견</h2>
+
+<p align="center">
+<img src="https://images.pexels.com/photos/7172646/pexels-photo-7172646.jpeg?w=350" alt="키보드 기술 작업공간" width="350"/>
+</p>
+
+<p>위기 속에서도 Anthropic은 조용히 새로운 카드를 꺼냈습니다.<br>
+<span style="color:#3182ce;"><strong>Mythos(미토스)</strong></span>라는 이름의 새 모델입니다.</p>
+
+<p>Mythos는 소프트웨어의 보안 취약점을 자동으로 찾아내는 데 특화된 모델로, Mozilla 재단과의 협력 테스트에서 <strong>Firefox 브라우저에서만 271개의 취약점을 발견</strong>했습니다.</p>
+
+<p>이 성능은 업계를 충격에 빠뜨렸습니다. 인간 보안 전문가 팀이 몇 달 동안 찾던 것을 AI가 훨씬 짧은 시간에 해낸 것입니다.</p>
+
+<p>하지만 이 모델은 <strong>사이버보안 위험</strong> 때문에 일반에는 공개되지 않습니다.<br>
+Anthropic은 Project Glasswing(프로젝트 글래스윙)을 통해 검증된 파트너사에게만 제한적으로 제공하고 있습니다. 심지어 최근에는 이 Mythos 모델 자체가 <strong>해킹 시도를 받았다는 조사까지 진행 중</strong>입니다.</p>
+
+<div style="background:#fff5f5;border-left:5px solid #c53030;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#c53030;">⚠️ 경고: 이중성을 봐야 합니다</p>
+<p style="margin:0;line-height:1.8;">Anthropic은 한편으로는 Claude Code를 몰래 성능 저하시키면서, 다른 한편으로는 사이버 공격에 쓰일 수 있는 초강력 취약점 탐색 모델을 만들고 있습니다. 이를 어떻게 해석해야 할까요? <strong>"안전을 위한다"는 말과 행동이 일치하는지</strong> 우리는 계속 지켜봐야 합니다.</p>
+</div>
+
+<hr>
+
+<h2>Anthropic의 약속 — 앞으로는 다르겠다?</h2>
+
+<p>Anthropic은 이번 사태 이후 몇 가지를 약속했습니다:</p>
+
+<ul style="line-height:2.0;">
+<li>향후 Claude Code 공개 빌드 전 <strong>내부 테스트를 더 철저히 실시</strong></li>
+<li>Code Review 도구 개선</li>
+<li>변경사항 발생 시 <strong>더 투명하게 공개</strong></li>
+</ul>
+
+<p>사용자들의 반응은 엇갈립니다.<br>
+"다행히 인정했다"는 반응도 있고, "애초에 왜 숨겼냐"는 비판도 여전합니다.</p>
+
+> 💡 <span style="color:#dd6b20;"><strong>현직쌤 팁</strong></span>: AI 도구를 업무에 깊이 의존하기 전에, 항상 "이 서비스가 갑자기 바뀌거나 없어지면 어떻게 할 것인가"를 생각해두세요. 클라우드 기반 AI 서비스는 공지 없이 언제든 바뀔 수 있습니다.
+
+<hr>
+
+<h2>그래서 클로드, 지금 써도 될까요?</h2>
+
+<p>결론적으로 현 상황을 정리하면 이렇습니다:</p>
+
+<div style="background:#e6fffa;border:1px solid #319795;padding:16px 20px;margin:20px 0;border-radius:6px;">
+<p style="margin:0 0 6px;font-weight:bold;color:#2c7a7b;">✅ 현재 상태 요약 (2026년 4월 기준)</p>
+<ul style="margin:0;padding-left:20px;line-height:1.9;">
+<li>Anthropic이 성능 저하 원인을 공식 인정하고 수정 완료</li>
+<li>기존 Pro·Max 구독자는 Claude Code 계속 사용 가능</li>
+<li>단순 글쓰기·요약·번역 등 일반 작업은 여전히 최상급 품질</li>
+<li>복잡한 코딩 에이전트 작업은 당분간 교차검증 권장</li>
+</ul>
+</div>
+
+<p>저(현직쌤)는 블로그 글 작성, 자료 요약, 아이디어 브레인스토밍 등 <strong>일반 텍스트 작업</strong>에 클로드를 매일 사용하고 있습니다. 이 범위에서는 여전히 강력한 도구입니다.</p>
+
+<p>다만 이번 사태는 중요한 교훈을 줍니다.<br>
+<span style="color:#c53030;"><strong>AI 서비스는 내 동의 없이 바뀔 수 있다.</strong></span><br>
+그 변화가 공개되지 않을 수도 있다.<br>
+그래서 우리는 AI를 <strong>똑똑하게 의심하면서 사용해야</strong> 합니다.</p>
+
+<hr>
+
+<p style="color:#718096;font-size:13px;">
+참고: The Register, VentureBeat, Inc., CBS News, TechCrunch 보도 종합 (2026년 4월)<br>
+이미지 출처: Pexels
+</p>
