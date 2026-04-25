@@ -60,14 +60,18 @@
 
 ## 🖼 이미지 — Canva MCP 사용 (기본)
 
-- 블로그 이미지는 **Canva MCP로 생성** — 묻지 말고 먼저 진행
-- `generate-design` 후 Claude가 **직접 1개 선택** — 사용자에게 고르라고 하지 말 것
-- 선택한 디자인은 playwright로 **navigate → take_screenshot** 순서로 바로 보여줄 것
+- **본문 이미지는 3장** — 상단/중간/하단. 나머지는 SVG로 대체
+- **구성**: 실사 사진 1~2장 + Canva 1~2장 혼합
+- 실사 사진은 **image-finder-svg 에이전트**에게 검색 위임 ("AI/로봇/직장인 관련 무료 사진 찾아줘" 형식으로 요청)
+- **Canva 텍스트는 영어로** — 한글 폰트가 어색하므로 영어로 작성
+- **이미지 width: 350px** (HTML `width="350"`)
+- `generate-design` 후 Claude가 **직접 1개 선택**, 사용자에게 고르라고 하지 말 것
+- 선택한 Canva 디자인은 playwright로 **navigate → take_screenshot** 순서로 바로 보여줄 것
 - 템플릿 잔여 텍스트(날짜, 주소, 웹사이트 등)는 editing transaction으로 자동 삭제 후 commit
+- 이미지 폴더 구조: `images/YYYY-MM-DD-{글번호}/img1.png` 형식
+  - 예: `images/2026-04-25-001/img1-human-ai.png`
+- GitHub raw URL로 HTML에 삽입: `https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/YYYY-MM-DD-{글번호}/{파일명}.png`
 - 사용자 Canva 계정: **Pro**
-- **본문 이미지는 3장** — 상단/중간/하단 배치. 나머지는 SVG로 대체
-- 이미지는 GitHub raw URL로 HTML에 삽입: `https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/{폴더}/{파일명}.png`
-- 이미지 width는 500px 기준
 
 ---
 
