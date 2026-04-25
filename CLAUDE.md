@@ -62,11 +62,14 @@
 
 - **본문 이미지는 3장** — 상단/중간/하단. 나머지는 SVG로 대체
 - **구성**: 실사 사진 1~2장 + Canva 1~2장 혼합
-- 실사 사진은 **image-finder-svg 에이전트**에게 검색 위임 ("AI/로봇/직장인 관련 무료 사진 찾아줘" 형식으로 요청)
+- 실사 사진 검색과 Canva 생성은 **항상 병렬로** 동시 실행
+  - image-finder-svg 에이전트 → 실사 사진 1~2장 검색
+  - Canva MCP → 디자인 이미지 1~2장 생성
+  - 두 작업을 같은 메시지에서 동시에 호출할 것
 - **Canva 텍스트는 영어로** — 한글 폰트가 어색하므로 영어로 작성
 - **이미지 width: 350px** (HTML `width="350"`)
 - `generate-design` 후 Claude가 **직접 1개 선택**, 사용자에게 고르라고 하지 말 것
-- 선택한 Canva 디자인은 playwright로 **navigate → take_screenshot** 순서로 바로 보여줄 것
+- 선택한 Canva 디자인은 playwright로 내부 확인만 하고 **사용자에게 스크린샷 띄우지 말 것**
 - 템플릿 잔여 텍스트(날짜, 주소, 웹사이트 등)는 editing transaction으로 자동 삭제 후 commit
 - 이미지 폴더 구조: `images/YYYY-MM-DD-{글번호}/img1.png` 형식
   - 예: `images/2026-04-25-001/img1-human-ai.png`
