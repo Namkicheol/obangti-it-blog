@@ -68,7 +68,7 @@ U("f3_id",{placeholder:false})
 export_nodes(
   nodeIds: ["f1_id","f2_id","f3_id"],
   format: "png",
-  outputDir: "/Users/namgicheol/Library/CloudStorage/OneDrive-학장중학교/blog writings/images/YYYY-MM-DD-{글번호}/"
+  outputDir: "/Users/namgicheol/Library/Mobile Documents/com~apple~CloudDocs/Developments/blog writings/images/YYYY-MM-DD-{글번호}/"
 )
 ```
 
