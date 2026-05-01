@@ -1,83 +1,55 @@
 ---
-name: blog-image-pencil
-description: obangti 블로그 글 작성 시 Pencil MCP로 본문 이미지 3장을 AI 생성하는 워크플로우. 블로그 글 작성 중 이미지가 필요할 때, "이미지 만들어", "이미지 추가", "Pencil로 이미지" 등의 요청이 있을 때 반드시 이 스킬을 사용할 것. 이미지 생성 → 확인 → PNG 내보내기 → HTML URL 업데이트까지 한 번에 처리.
+name: blog-image-free
+description: obangti 블로그 글 작성 시 무료 이미지(Pexels/Unsplash/Pixabay)를 검색·다운로드해 본문 이미지 3장을 준비하는 워크플로우. 블로그 글 작성 중 이미지가 필요할 때, "이미지 찾아", "이미지 추가", "무료 이미지" 등의 요청이 있을 때 반드시 이 스킬을 사용할 것. 이미지 검색 → 다운로드 → 파일명 변경 → HTML URL 업데이트까지 한 번에 처리.
 ---
 
-# 블로그 이미지 생성 (Pencil MCP)
+# 블로그 이미지 준비 (무료 이미지 검색 + 다운로드)
 
 블로그 글 1편당 이미지 **3장** — 상단/중간/하단 위치에 배치.
 
-## 사전 확인
-
-Pencil.app이 실행 중이어야 한다. `get_editor_state` 호출 시 WebSocket 에러가 나면 사용자에게 알린다:
-> "Pencil.app을 먼저 열어주세요: `! open /Applications/Pencil.app`"
-
 ## 워크플로우
 
-### 1단계 — 캔버스 준비
+### 1단계 — 글 내용 파악 & 검색 키워드 선정
 
-```
-get_editor_state(include_schema: false)
-find_empty_space_on_canvas(width:700, height:1600, padding:100, direction:"right")
-```
+HTML 파일을 읽고 각 이미지 위치(상단/중간/하단)에 어울리는 **영어 검색 키워드** 3개를 정한다.
 
-스키마가 이번 세션에서 아직 로드된 적 없으면 `include_schema: true`로 호출.
-
-### 2단계 — 이미지 3장 생성
-
-빈 공간 좌표 `{x, y}`를 기준으로 프레임 3개를 만들고 AI 이미지를 생성한다.
-
-```javascript
-// batch_design operations
-f1=I("document",{type:"frame",width:700,height:467,x:X,y:Y,placeholder:true})
-G(f1,"ai","[상단 이미지 프롬프트]")
-f2=I("document",{type:"frame",width:700,height:467,x:X,y:Y+517,placeholder:true})
-G(f2,"ai","[중간 이미지 프롬프트]")
-f3=I("document",{type:"frame",width:700,height:467,x:X,y:Y+1034,placeholder:true})
-G(f3,"ai","[하단 이미지 프롬프트]")
-```
-
-**이미지 프롬프트 작성 원칙:**
-- 글의 각 섹션 내용을 반영해 구체적으로 작성
-- 영어로 작성, photorealistic / cinematic / 8k 등 품질 키워드 포함
 - 상단: 글 전체 주제를 대표하는 이미지
-- 중간: 글의 핵심 개념이나 전환점 이미지
-- 하단: 결론·시사점과 연결되는 이미지
+- 중간: 글의 핵심 개념·전환점과 연결되는 이미지
+- 하단: 결론·시사점을 상징하는 이미지
 
-### 3단계 — 결과 확인
+### 2단계 — Pexels에서 이미지 검색
 
-생성된 노드 ID로 각 이미지를 스크린샷으로 확인한다:
+WebSearch로 Pexels 검색 결과 URL에서 직접 다운로드 가능한 이미지 URL을 찾는다.
+
+검색 쿼리 예시:
 ```
-get_screenshot(nodeId: "f1의 실제 ID")
-get_screenshot(nodeId: "f2의 실제 ID")
-get_screenshot(nodeId: "f3의 실제 ID")
-```
-
-이미지가 프롬프트 의도와 맞지 않으면 `G()`를 다시 호출해 재생성.
-
-### 4단계 — placeholder 제거 및 내보내기
-
-```javascript
-// batch_design
-U("f1_id",{placeholder:false})
-U("f2_id",{placeholder:false})
-U("f3_id",{placeholder:false})
+site:pexels.com {keyword} free photo download
+pexels.com photo {keyword}
 ```
 
+또는 Unsplash / Pixabay에서 검색:
 ```
-export_nodes(
-  nodeIds: ["f1_id","f2_id","f3_id"],
-  format: "png",
-  outputDir: "/Users/namgicheol/Library/Mobile Documents/com~apple~CloudDocs/Developments/blog writings/images/YYYY-MM-DD-{글번호}/"
-)
+site:unsplash.com {keyword}
+site:pixabay.com {keyword} free download
 ```
 
-내보내기 후 파일명을 내용에 맞게 변경:
-- `img1-{주제키워드}.png`
-- `img2-{주제키워드}.png`  
-- `img3-{주제키워드}.png`
+**목표**: 각 키워드당 직접 다운로드 가능한 이미지 URL 1개 확보.
 
-### 5단계 — HTML 업데이트
+### 3단계 — 이미지 다운로드
+
+Bash의 `curl`로 이미지를 올바른 폴더에 저장한다.
+
+```bash
+curl -L "이미지URL" -o "/Users/namgicheol/Library/Mobile Documents/com~apple~CloudDocs/Developments/blog writings/images/YYYY-MM-DD-{글번호}/img1-{키워드}.png"
+
+curl -L "이미지URL" -o "/Users/namgicheol/Library/Mobile Documents/com~apple~CloudDocs/Developments/blog writings/images/YYYY-MM-DD-{글번호}/img2-{키워드}.png"
+
+curl -L "이미지URL" -o "/Users/namgicheol/Library/Mobile Documents/com~apple~CloudDocs/Developments/blog writings/images/YYYY-MM-DD-{글번호}/img3-{키워드}.png"
+```
+
+다운로드 후 `ls -lh` 로 파일 크기 확인 (1KB 미만이면 다운로드 실패).
+
+### 4단계 — HTML 업데이트
 
 HTML 파일의 이미지 `src`를 GitHub raw URL로 교체:
 
@@ -87,9 +59,18 @@ https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/YYYY-MM
 
 `width="350"` 유지.
 
-### 6단계 — 폴더 구조 완성 및 커밋
+**교체 예시:**
+```html
+<!-- 변경 전 -->
+<img src="[이미지자리]" alt="설명" width="350"/>
 
-HTML 파일을 이미지와 같은 폴더로 이동:
+<!-- 변경 후 -->
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-05-01-004/img1-terminal.png" alt="터미널 화면" width="350"/>
+```
+
+### 5단계 — 폴더 구조 확인 및 커밋
+
+최종 폴더 구조:
 ```
 images/YYYY-MM-DD-{글번호}/tistory_{글이름}.html
 images/YYYY-MM-DD-{글번호}/img1-{키워드}.png
@@ -99,9 +80,16 @@ images/YYYY-MM-DD-{글번호}/img3-{키워드}.png
 
 GitHub에 push해야 raw URL이 작동한다. 사용자에게 확인 후 커밋/push.
 
+## 이미지 다운로드 실패 시 대처
+
+1. **URL 재확인**: WebSearch로 같은 키워드 재검색, 다른 이미지 URL 시도
+2. **사이트 변경**: Pexels → Unsplash → Pixabay 순서로 시도
+3. **키워드 변경**: 더 단순하거나 다른 방향의 키워드 시도
+4. **3회 실패 시**: 사용자에게 보고하고 수동 검색 요청
+
 ## 글 발행일 표시
 
-HTML 상단(첫 번째 이미지 바로 위)에 날짜 추가:
+HTML 상단(첫 번째 이미지 바로 위)에 날짜 확인:
 ```html
 <p style="font-size:13px;color:#a0aec0;margin-bottom:4px;">YYYY년 M월 D일</p>
 ```
@@ -123,4 +111,3 @@ HTML 상단(첫 번째 이미지 바로 위)에 날짜 추가:
 태그 작성 기준 (10개):
 - 핵심 키워드: AI 모델명, 기업명 등 고유명사
 - 검색 유입 키워드: 독자가 네이버/구글에서 검색할 법한 한국어
-- 예: `Claude, Anthropic, ClaudeMythos, AI보안, 사이버보안, 인공지능뉴스, 클로드, 제로데이, 해킹, AI위험성`

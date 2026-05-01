@@ -89,17 +89,12 @@
 
 ---
 
-## 🖼 이미지 — Pencil MCP 사용 (기본)
+## 🖼 이미지 — Gemini로 생성 (사용자 지시: 2026-05-01)
 
 - **본문 이미지는 3장** — 상단/중간/하단. 나머지는 SVG로 대체
-- **Pencil MCP로 3장 AI 생성** (사용자 지시: 2026-04-25)
-  1. Pencil.app이 실행 중인지 확인 (안 되어 있으면 `open /Applications/Pencil.app` 알려주기)
-  2. `get_editor_state` → `find_empty_space_on_canvas`
-  3. 프레임 생성 후 `G(frameId, "ai", "프롬프트")` 로 이미지 생성
-  4. `get_screenshot` 으로 결과 확인
-  5. `export_nodes` → `images/YYYY-MM-DD-{글번호}/` 폴더로 내보내기
+- **Gemini 채팅창에 이미지 생성 프롬프트 직접 입력** (Pencil MCP 사용 중단)
 - **이미지 width: 350px** (HTML `width="350"`)
-- 폴더 구조: **HTML 파일 + 이미지를 같은 폴더에** (사용자 지시: 2026-04-25)
+- 폴더 구조: **HTML 파일 + 이미지를 같은 폴더에**
   - `images/YYYY-MM-DD-{글번호}/tistory_글이름.html`
   - `images/YYYY-MM-DD-{글번호}/img1-설명.png`
   - 예: `images/2026-04-25-002/tistory_mythos_2026.html`
@@ -132,6 +127,36 @@
 
 ---
 
+## 🏷 태그
+
+글 작성 시 상단 주석 또는 메타 정보에 태그를 포함한다:
+
+```
+태그: 키워드1, 키워드2, 키워드3, ...
+```
+
+태그 기준 (10개):
+- **핵심 키워드**: 주제 고유명사, 서비스명, 개념어
+- **검색 유입 키워드**: 독자가 검색할 법한 한국어
+
+---
+
+## 🔗 블로그 내부 링크 (cross-linking)
+
+글 본문 안에 관련된 **기존 블로그 글**을 최소 1~2개 연결한다.
+
+- 발행된 글 목록(`📰 발행된 글 목록` 섹션)에서 주제가 겹치는 글 찾기
+- 본문 자연스러운 위치에 인라인 링크 삽입:
+  ```html
+  <a href="https://obangti.tistory.com/<post-id>" target="_blank">관련 글 제목</a>
+  ```
+- 글 하단 "관련 글" 버튼 추가 (선택):
+  ```html
+  <p align="center">
+  <a href="https://obangti.tistory.com/<post-id>" target="_blank" style="display:inline-block;padding:10px 22px;background:#2d3748;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;">📖 관련 글: [제목] →</a>
+  </p>
+  ```
+
 ---
 
 ## 📰 발행된 글 목록
@@ -141,5 +166,6 @@
 | tistory_claude_controversy_2026.html | Claude Code 성능 저하 논란 + Anthropic 사과 | 2026-04-25 |
 | tistory_colleague_skill_2026.html | Claude Code colleague 스킬 소개 | 2026-04-25 |
 | images/2026-04-25-002/tistory_mythos_2026.html | Claude Mythos 공개금지 AI + 해킹 유출 사건 | 2026-04-25 |
+| images/2026-05-01-004/tistory_claude_code_terms_2026.html | Claude Code 처음 시작하는 비개발자 필수 용어 8개 | 2026-05-01 |
 
-*마지막 업데이트: 2026-04-25*
+*마지막 업데이트: 2026-05-01*
