@@ -167,5 +167,6 @@
 | tistory_colleague_skill_2026.html | Claude Code colleague 스킬 소개 | 2026-04-25 |
 | images/2026-04-25-002/tistory_mythos_2026.html | Claude Mythos 공개금지 AI + 해킹 유출 사건 | 2026-04-25 |
 | images/2026-05-01-004/tistory_claude_code_terms_2026.html | Claude Code 처음 시작하는 비개발자 필수 용어 8개 | 2026-05-01 |
+| images/2026-05-02-005/tistory_git_github_2026.html | Git·GitHub 완전 초보 가이드 — 터미널 명령어·기초 용어 총정리 | 2026-05-02 |
 
-*마지막 업데이트: 2026-05-01*
+*마지막 업데이트: 2026-05-02*

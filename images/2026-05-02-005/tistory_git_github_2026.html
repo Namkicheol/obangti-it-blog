@@ -1,0 +1,472 @@
+<meta charset="UTF-8">
+<!--
+  카테고리: AI/최신뉴스
+  제목(안): 개발자만 쓰는 줄 알았던 Git — 터미널 몰라도 30분이면 이해하는 완전 기초
+  발행일: 2026-05-02
+  태그: git, github, 깃, 깃허브, 터미널, 버전관리, 코딩입문, git명령어, 깃허브사용법, 바이브코딩
+  소스: git-scm.com, github.com 공식 문서
+-->
+
+<p style="font-size:13px;color:#a0aec0;margin-bottom:4px;">2026년 5월 2일</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-05-02-005/img1-terminal-git.jpg" alt="터미널 화면에서 git 명령어를 입력하는 모습" width="350"/>
+</p>
+
+<p>"Git은 개발자들만 쓰는 거 아닌가요?"</p>
+<p>아니요. 지금은 <strong>AI 도구 쓰는 사람이라면 누구나 마주치는 개념</strong>이 됐습니다.<br>
+Claude Code, Cursor, Copilot — 이런 AI 코딩 도구 쓰다 보면 어느 순간 이런 말이 튀어나옵니다.</p>
+<p style="text-align:center;font-size:15px;color:#4a5568;font-style:italic;">"git push 해주세요." "GitHub에 올려뒀어요." "레포 클론하고 시작하면 돼요."</p>
+<p>이때 <span style="color:#c53030;"><strong>Git을 모르면 그 자리에서 멈춥니다.</strong></span> 오늘 이 글 하나로 그 벽을 넘어봅시다.</p>
+
+<hr>
+
+<div style="background:#fff5f5;border-left:5px solid #c53030;padding:16px 20px;margin:24px 0;border-radius:4px;">
+<p style="margin:0 0 8px;font-size:15px;font-weight:bold;color:#c53030;">📌 오늘 이 글 하나로 알게 되는 것</p>
+<ul style="margin:0;padding-left:20px;line-height:2.2;">
+<li><strong>Git이 뭔지</strong> — 파일 저장이랑 뭐가 다른지</li>
+<li><strong>GitHub와의 차이</strong> — 이름이 비슷한데 완전히 다른 두 개</li>
+<li><strong>꼭 알아야 할 용어 7개</strong> — 커밋, 푸시, 풀, 클론, 브랜치, 머지, 레포지토리</li>
+<li><strong>터미널 생존 명령어 5개</strong> — 이것만 알면 길 안 잃는다</li>
+<li><strong>Git 핵심 명령어 15개</strong> — 표로 한눈에 정리</li>
+<li><strong>처음으로 GitHub에 올리는 실전 순서</strong> — 단계별 복붙용</li>
+</ul>
+<p style="margin:12px 0 0;font-size:14px;color:#742a2a;">코딩 경험 없어도 됩니다. 터미널 처음 켜는 분도 따라올 수 있도록 썼어요.</p>
+</div>
+
+<hr>
+
+<h2>Git이 뭔데요? — "그냥 저장"이랑 다른 이유</h2>
+
+<p>파일을 저장한다는 건 누구나 압니다. Ctrl+S, ⌘+S. 근데 Git이 하는 건 그것보다 훨씬 강력해요.</p>
+
+<p>비유로 설명할게요. 구글 문서(Google Docs) 쓰다 보면 <strong>변경 기록</strong> 기능 아시죠? "어제 오후 3시 버전으로 되돌리기"가 되는 그거요. 근데 이게 문서 하나에서만 되고, 폴더 전체, 프로젝트 전체에 적용되진 않잖아요.</p>
+
+<p><span style="color:#3182ce;"><strong>Git</strong></span>은 그걸 코드 프로젝트 전체에 해줍니다. 내가 원하는 시점마다 "지금 이 상태를 기록해둬" 하면 Git이 그 스냅샷을 쌓아둬요. 나중에 "3일 전 버전으로 돌아가야겠다"싶으면 명령어 하나로 타임머신처럼 돌아갑니다.</p>
+
+<div style="background:#f0fff4;border-left:5px solid #319795;padding:14px 18px;margin:20px 0;border-radius:4px;">
+<p style="margin:0;font-size:14px;line-height:1.9;"><strong>💡 현직쌤 비유</strong><br>
+Git = 게임 <strong>세이브 포인트</strong> 시스템이에요.<br>
+보스 처치 전에 세이브 → 보스한테 죽음 → 세이브 파일로 복구.<br>
+코딩도 똑같아요. "기능 추가 전" 세이브 → 망함 → 그 시점으로 복구. 이게 Git입니다.</p>
+</div>
+
+<p>그리고 Git은 혼자만 쓰는 게 아니에요. 팀원들이 같은 프로젝트를 동시에 수정해도 서로 충돌 없이 합칠 수 있게 해줍니다. 이게 Git이 세상에서 제일 중요한 개발 도구가 된 이유예요.</p>
+
+<div style="background:#faf5ff;border-left:5px solid #805ad5;padding:14px 18px;margin:20px 0;border-radius:4px;">
+<p style="margin:0 0 6px;font-size:14px;"><strong>📊 숫자로 보는 Git 위상</strong></p>
+<ul style="margin:0;padding-left:20px;line-height:2.0;font-size:14px;">
+<li>전 세계 Git 사용자: <strong>1억 명 이상</strong> (2024년 기준)</li>
+<li>GitHub 저장소 수: <strong>4억 2천만 개 이상</strong></li>
+<li>개발자 채용공고 중 Git 언급 비율: <strong>90% 이상</strong></li>
+<li>Fortune 500 기업 중 GitHub 사용: <strong>90% 이상</strong></li>
+</ul>
+</div>
+
+<hr>
+
+<h2>GitHub는 Git이랑 다른 건가요?</h2>
+
+<p>이름이 비슷해서 헷갈리는 분 정말 많아요. 결론부터:</p>
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+<thead>
+<tr style="background:#2d3748;color:#fff;">
+<th style="padding:12px 16px;text-align:left;width:20%;">구분</th>
+<th style="padding:12px 16px;text-align:left;width:40%;">Git</th>
+<th style="padding:12px 16px;text-align:left;width:40%;">GitHub</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;">정체</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">버전 관리 <strong>소프트웨어</strong></td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">Git 저장소를 올리는 <strong>웹 서비스</strong></td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;">위치</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">내 컴퓨터 안</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">인터넷 (클라우드)</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;">만든 곳</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">리누스 토르발스 (Linux 아버지)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">GitHub Inc. → Microsoft 인수</td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;">비유</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">일기장 (내 책상 위에 있는 것)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">일기장 보관하는 클라우드 서버</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;font-weight:bold;">없어도 되나?</td>
+<td style="padding:11px 16px;">Git 없으면 GitHub 못 씀</td>
+<td style="padding:11px 16px;">GitHub 없어도 Git만 쓸 수 있음</td>
+</tr>
+</tbody>
+</table>
+
+<p>정리하면: <strong>Git은 도구고, GitHub는 그 도구로 만든 파일을 인터넷에 저장하는 곳</strong>입니다. 둘 다 쓰는 게 보통이에요.</p>
+
+<p>그리고 GitHub 말고도 <span style="color:#805ad5;"><strong>GitLab</strong></span>, <span style="color:#805ad5;"><strong>Bitbucket</strong></span> 같은 비슷한 서비스도 있어요. 원리는 똑같습니다. 이 글에서는 GitHub 기준으로 설명할게요.</p>
+
+<hr>
+
+<h2>꼭 알아야 할 용어 7개 — 이것만 알면 대화가 된다</h2>
+
+<p>Git 쓸 때 반드시 나오는 용어들만 뽑았어요. 이 7개면 충분합니다.</p>
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+<thead>
+<tr style="background:#2d3748;color:#fff;">
+<th style="padding:12px 16px;text-align:left;width:25%;">용어</th>
+<th style="padding:12px 16px;text-align:left;width:75%;">쉬운 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;color:#3182ce;">레포지토리 (Repository)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">프로젝트 폴더 전체. 줄여서 <strong>레포(repo)</strong>라고 해요. "내 레포에 올렸어요" = "내 프로젝트 폴더를 GitHub에 올렸어요."</td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;color:#3182ce;">커밋 (Commit)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">지금 이 상태를 기록으로 남기는 것. 게임 세이브. "커밋했어" = "지금 상태를 저장 기록으로 남겼어."</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;color:#3182ce;">푸시 (Push)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">내 컴퓨터 → GitHub로 올리기. "푸시해줘" = "GitHub에 올려줘."</td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;color:#3182ce;">풀 (Pull)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">GitHub → 내 컴퓨터로 받기. 팀원이 올린 내용을 내 컴퓨터에 반영할 때 씁니다.</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;color:#3182ce;">클론 (Clone)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">GitHub에 있는 레포를 내 컴퓨터에 통째로 복제해서 받기. 새 컴퓨터에서 시작하거나 남의 프로젝트 가져올 때.</td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-weight:bold;color:#3182ce;">브랜치 (Branch)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">작업 분기. 원본 건드리지 않고 "복사본"에서 실험할 수 있어요. 망해도 원본은 안전합니다.</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;font-weight:bold;color:#3182ce;">머지 (Merge)</td>
+<td style="padding:11px 16px;">브랜치에서 작업한 내용을 원본(main)에 합치는 것. "머지했어" = "내 작업을 본 프로젝트에 합쳤어."</td>
+</tr>
+</tbody>
+</table>
+
+<div style="background:#fffaf0;border-left:5px solid #dd6b20;padding:14px 18px;margin:20px 0;border-radius:4px;">
+<p style="margin:0;font-size:14px;line-height:1.9;"><strong>⚠️ 자주 하는 실수</strong><br>
+<strong>"커밋했는데 GitHub에 없어요"</strong> — 이건 커밋(로컬 저장)은 했는데 <strong>푸시(업로드)</strong>를 안 한 거예요.<br>
+커밋 ≠ 올리기. 커밋은 내 컴퓨터에만 기록, 푸시해야 GitHub에 올라갑니다.</p>
+</div>
+
+<hr>
+
+<h2>터미널 기초 — 처음 켜는 분을 위한 생존 명령어 5개</h2>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-05-02-005/img2-terminal-commands.jpg" alt="터미널에서 명령어를 입력하는 화면" width="350"/>
+</p>
+
+<p>터미널은 마우스 없이 <strong>키보드 명령어로 컴퓨터를 조종하는 창</strong>이에요.</p>
+
+<p>맥북에서 여는 방법:</p>
+<div style="background:#2d3748;color:#a0aec0;padding:14px 18px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;">
+⌘ + 스페이스바 → "Terminal" 입력 → 엔터
+</div>
+
+<p>Windows에서 여는 방법:</p>
+<div style="background:#2d3748;color:#a0aec0;padding:14px 18px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;">
+시작 버튼 → "cmd" 또는 "PowerShell" 검색 → 엔터
+</div>
+
+<p>열면 뭔가 깜빡이는 커서만 있는 창이 나와요. 여기에 명령어를 치면 됩니다. 무서울 거 없어요. 잘못 쳐도 컴퓨터가 폭발하진 않습니다.</p>
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+<thead>
+<tr style="background:#2d3748;color:#fff;">
+<th style="padding:12px 16px;text-align:left;width:30%;">명령어</th>
+<th style="padding:12px 16px;text-align:left;width:30%;">하는 일</th>
+<th style="padding:12px 16px;text-align:left;width:40%;">예시</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#c53030;font-weight:bold;">pwd</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">지금 어느 폴더에 있는지 확인</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;font-size:13px;">/Users/namgicheol/Desktop</td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#c53030;font-weight:bold;">ls</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">현재 폴더 안 파일 목록 보기</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;font-size:13px;">README.md index.html</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#c53030;font-weight:bold;">cd 폴더이름</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">폴더로 이동 (cd = change directory)</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;font-size:13px;">cd Desktop</td>
+</tr>
+<tr>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#c53030;font-weight:bold;">cd ..</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;">한 단계 위 폴더로 이동</td>
+<td style="padding:11px 16px;border-bottom:1px solid #e2e8f0;font-family:monospace;font-size:13px;">Desktop → Users로 올라감</td>
+</tr>
+<tr style="background:#f7fafc;">
+<td style="padding:11px 16px;font-family:monospace;color:#c53030;font-weight:bold;">mkdir 폴더이름</td>
+<td style="padding:11px 16px;">새 폴더 만들기 (mkdir = make directory)</td>
+<td style="padding:11px 16px;font-family:monospace;font-size:13px;">mkdir my-project</td>
+</tr>
+</tbody>
+</table>
+
+<p>연습해보세요. 터미널 열고 아래 순서대로 쳐보면 돼요:</p>
+
+<div style="background:#2d3748;color:#68d391;padding:16px 20px;margin:20px 0;border-radius:6px;font-family:monospace;font-size:14px;line-height:2.0;">
+pwd<br>
+<span style="color:#a0aec0;"># 현재 위치가 뜹니다</span><br><br>
+ls<br>
+<span style="color:#a0aec0;"># 파일 목록이 뜹니다</span><br><br>
+cd Desktop<br>
+<span style="color:#a0aec0;"># 바탕화면으로 이동</span><br><br>
+mkdir git-practice<br>
+<span style="color:#a0aec0;"># git-practice 폴더 생성</span><br><br>
+cd git-practice<br>
+<span style="color:#a0aec0;"># 방금 만든 폴더로 이동</span>
+</div>
+
+<div style="background:#ebf8ff;border-left:5px solid #3182ce;padding:14px 18px;margin:20px 0;border-radius:4px;">
+<p style="margin:0;font-size:14px;line-height:1.9;"><strong>💡 현직쌤 팁 — Tab키 써보세요</strong><br>
+폴더 이름 다 치지 않아도 됩니다. <strong>Tab 키</strong>를 누르면 자동완성돼요.<br>
+<code>cd Des</code> 치고 Tab 누르면 <code>cd Desktop</code> 으로 완성됩니다. 오타도 줄고 훨씬 빠릅니다.</p>
+</div>
+
+<hr>
+
+<h2>Git 설치하기 — 딱 한 번만 하면 됩니다</h2>
+
+<p>Git은 컴퓨터에 한 번만 설치하면 돼요. 이후엔 어떤 프로젝트에서도 씁니다.</p>
+
+<p><strong>맥북 (Mac) 설치 방법</strong></p>
+
+<p>터미널에 아래 명령어를 치면 끝이에요:</p>
+
+<div style="background:#2d3748;color:#68d391;padding:14px 18px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;">
+xcode-select --install
+</div>
+
+<p>팝업창이 뜨면 "설치" 누르면 됩니다. Homebrew(맥 패키지 매니저)가 있다면 이것도 됩니다:</p>
+
+<div style="background:#2d3748;color:#68d391;padding:14px 18px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;">
+brew install git
+</div>
+
+<p><strong>Windows 설치 방법</strong></p>
+
+<p>git-scm.com 에 접속해서 "Download for Windows" 버튼 클릭 → 설치 파일 실행 → 기본 설정으로 Next 계속 클릭하면 됩니다.</p>
+
+<p><strong>설치 확인</strong></p>
+
+<p>터미널에 아래 명령어를 치면 버전 번호가 나옵니다. 숫자가 나오면 설치 완료예요:</p>
+
+<div style="background:#2d3748;color:#68d391;padding:14px 18px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;">
+git --version<br>
+<span style="color:#a0aec0;"># git version 2.43.0 이런 식으로 나오면 성공</span>
+</div>
+
+<p><strong>Git에 내 이름/이메일 등록 (최초 1회)</strong></p>
+
+<p>커밋 기록에 "누가 작업했는지" 남겨두기 위해 한 번만 설정해요:</p>
+
+<div style="background:#2d3748;color:#68d391;padding:16px 20px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;line-height:2.0;">
+git config --global user.name "홍길동"<br>
+git config --global user.email "hong@example.com"
+</div>
+
+<hr>
+
+<h2>Git 핵심 명령어 15개 — 이것만 외우면 된다</h2>
+
+<p>처음엔 15개가 많아 보여도 실제로 매일 쓰는 건 5개 정도입니다. 나머지는 필요할 때 찾아서 쓰면 돼요.</p>
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:13px;">
+<thead>
+<tr style="background:#2d3748;color:#fff;">
+<th style="padding:11px 14px;text-align:left;width:35%;">명령어</th>
+<th style="padding:11px 14px;text-align:left;width:65%;">하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git init</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">현재 폴더를 Git 프로젝트로 시작. 딱 한 번 실행.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git status</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">지금 어떤 파일이 변경됐는지 현황 확인. 가장 자주 씁니다.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git add .</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">변경된 파일 전부를 커밋 대기 상태(스테이징)에 올리기.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git add 파일명</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">특정 파일만 스테이징에 올리기.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git commit -m "메시지"</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">스테이징된 파일을 기록으로 남기기. 메시지는 한 줄 설명.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git log</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">커밋 기록 전체 보기. q 누르면 나가짐.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git log --oneline</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">커밋 기록을 한 줄씩 간략하게 보기.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git diff</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">마지막 커밋 이후 뭐가 바뀌었는지 내용 비교.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git remote add origin URL</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">이 프로젝트와 GitHub 레포를 연결. URL은 GitHub 주소.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git push origin main</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">내 컴퓨터의 커밋을 GitHub에 올리기.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git pull origin main</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">GitHub의 최신 내용을 내 컴퓨터로 받기.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git clone URL</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">GitHub 레포를 내 컴퓨터에 통째로 복제.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git branch</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">현재 브랜치 목록 보기. *가 있는 게 지금 위치.</td>
+</tr>
+<tr>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-family:monospace;color:#319795;font-weight:bold;">git checkout -b 이름</td>
+<td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">새 브랜치 만들고 거기로 이동.</td>
+</tr>
+<tr style="background:#f0fff4;">
+<td style="padding:10px 14px;font-family:monospace;color:#319795;font-weight:bold;">git merge 브랜치이름</td>
+<td style="padding:10px 14px;">지정한 브랜치를 현재 브랜치에 합치기.</td>
+</tr>
+</tbody>
+</table>
+
+<div style="background:#fffaf0;border-left:5px solid #dd6b20;padding:14px 18px;margin:20px 0;border-radius:4px;">
+<p style="margin:0;font-size:14px;line-height:1.9;"><strong>💡 현직쌤 팁 — 처음엔 이 4개만 외우세요</strong><br>
+<strong>git status</strong> (현황 확인) → <strong>git add .</strong> (전부 준비) → <strong>git commit -m "설명"</strong> (저장) → <strong>git push origin main</strong> (올리기)<br>
+이 4개가 기본 흐름이에요. 나머지는 필요할 때 검색해서 씁니다.</p>
+</div>
+
+<hr>
+
+<h2>실전 시나리오 — 처음으로 GitHub에 코드 올리기</h2>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/Namkicheol/obangti-it-blog/main/images/2026-05-02-005/img3-github-success.jpg" alt="GitHub 저장소에 성공적으로 코드를 올린 화면" width="350"/>
+</p>
+
+<p>이제 실제로 해봅시다. 빈 폴더에서 GitHub까지 올리는 전체 과정이에요. 복붙해서 바로 써도 됩니다.</p>
+
+<p><strong>1단계 — GitHub 계정 만들기</strong></p>
+<p>github.com 에서 회원가입하세요. 무료 계정으로 충분합니다.</p>
+
+<p><strong>2단계 — GitHub에서 새 레포지토리 만들기</strong></p>
+<p>GitHub 로그인 → 오른쪽 상단 <strong>+</strong> 버튼 → "New repository" 클릭 → 레포 이름 입력 → "Create repository" 클릭.</p>
+<p>생성되면 화면에 URL이 나와요. 예시: <code>https://github.com/홍길동/my-project.git</code></p>
+
+<p><strong>3단계 — 내 컴퓨터에서 시작</strong></p>
+
+<div style="background:#2d3748;color:#68d391;padding:16px 20px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;line-height:2.2;">
+<span style="color:#a0aec0;"># 1. 작업할 폴더로 이동</span><br>
+cd Desktop<br>
+mkdir my-project<br>
+cd my-project<br><br>
+<span style="color:#a0aec0;"># 2. Git 시작 (딱 한 번)</span><br>
+git init<br><br>
+<span style="color:#a0aec0;"># 3. 파일 만들기 (예시: README 파일)</span><br>
+echo "# 내 첫 번째 프로젝트" &gt; README.md<br><br>
+<span style="color:#a0aec0;"># 4. 파일 상태 확인</span><br>
+git status<br><br>
+<span style="color:#a0aec0;"># 5. 전부 스테이징</span><br>
+git add .<br><br>
+<span style="color:#a0aec0;"># 6. 커밋 (저장 기록 남기기)</span><br>
+git commit -m "첫 번째 커밋"<br><br>
+<span style="color:#a0aec0;"># 7. GitHub 레포 연결 (URL은 본인 레포 주소로 변경)</span><br>
+git remote add origin https://github.com/홍길동/my-project.git<br><br>
+<span style="color:#a0aec0;"># 8. GitHub에 올리기</span><br>
+git push origin main
+</div>
+
+<p>마지막 줄 실행 후 GitHub 레포 페이지를 새로고침하면 <strong>README.md 파일이 올라가 있습니다.</strong> 이게 끝이에요.</p>
+
+<div style="background:#fff5f5;border-left:5px solid #c53030;padding:14px 18px;margin:20px 0;border-radius:4px;">
+<p style="margin:0;font-size:14px;line-height:1.9;"><strong>⚠️ "main" vs "master" 문제</strong><br>
+예전 Git은 기본 브랜치 이름이 <strong>master</strong>였는데 지금은 <strong>main</strong>으로 바뀌었어요.<br>
+push 할 때 오류 나면 <code>git push origin master</code>도 시도해보세요.<br>
+또는 처음부터 main으로 고정: <code>git branch -M main</code></p>
+</div>
+
+<hr>
+
+<h2>Claude Code랑 같이 쓰면 이렇게 됩니다</h2>
+
+<p>이 블로그를 보는 분들 중엔 AI 코딩 도구를 쓰는 분들도 많을 텐데, Git을 알면 AI 코딩이 훨씬 안전해져요.</p>
+
+<p>Claude Code가 코드를 막 수정할 때 두렵지 않나요? <span style="color:#c53030;"><strong>수정 전에 커밋 한 번 해두면 망해도 돌아올 수 있습니다.</strong></span></p>
+
+<div style="background:#2d3748;color:#68d391;padding:14px 18px;margin:16px 0;border-radius:6px;font-family:monospace;font-size:14px;line-height:2.0;">
+<span style="color:#a0aec0;"># Claude Code가 큰 작업 시작하기 전에 반드시</span><br>
+git add .<br>
+git commit -m "작업 시작 전 백업"<br><br>
+<span style="color:#a0aec0;"># 그리고 Claude Code에게 작업 시키기</span><br><br>
+<span style="color:#a0aec0;"># 망했을 때 되돌리기</span><br>
+git checkout .
+</div>
+
+<p>저는 Claude Code로 작업할 때 <strong>기능 하나 완성될 때마다 커밋</strong>해요. 이러면 중간에 뭔가 잘못돼도 마지막 커밋 시점으로 언제든 돌아올 수 있습니다. 보험이에요.</p>
+
+<p>혹시 Claude Code가 뭔지 아직 모르신다면 이 글 먼저 읽어보세요 →
+<a href="https://obangti.tistory.com/" target="_blank">Claude Code 처음 시작하는 비개발자 필수 용어 8개</a></p>
+
+<hr>
+
+<div style="background:#f7fafc;border:1px solid #e2e8f0;padding:20px 24px;margin:28px 0;border-radius:8px;">
+<p style="margin:0 0 12px;font-size:15px;font-weight:bold;color:#2d3748;">📌 오늘 배운 것 정리</p>
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<tr style="background:#edf2f7;">
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;font-weight:bold;width:30%;">Git</td>
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;">내 컴퓨터에서 쓰는 버전 관리 도구. 세이브 포인트.</td>
+</tr>
+<tr>
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;font-weight:bold;">GitHub</td>
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;">그 기록을 인터넷에 올려두는 서비스. 코드판 클라우드.</td>
+</tr>
+<tr style="background:#edf2f7;">
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;font-weight:bold;">핵심 흐름</td>
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;">status → add . → commit -m → push</td>
+</tr>
+<tr>
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;font-weight:bold;">터미널 기초</td>
+<td style="padding:9px 12px;border-bottom:1px solid #e2e8f0;">pwd, ls, cd, mkdir — 이 4개면 길 안 잃음</td>
+</tr>
+<tr style="background:#edf2f7;">
+<td style="padding:9px 12px;font-weight:bold;">AI와 함께 쓰기</td>
+<td style="padding:9px 12px;">Claude Code 작업 전에 커밋 한 번 → 언제든 복구 가능</td>
+</tr>
+</table>
+</div>
+
+<p>Git은 처음엔 낯설지만, 딱 세 번만 해보면 근육이 생깁니다. 오늘 README 파일 하나라도 GitHub에 올려보세요. 그게 시작이에요.</p>
+
+<p align="center">
+<a href="https://obangti.tistory.com/" target="_blank" style="display:inline-block;padding:10px 22px;background:#2d3748;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;">📖 관련 글: Claude Code 처음 시작하는 비개발자 필수 용어 8개 →</a>
+</p>
