@@ -1,7 +1,7 @@
-# obangti IT/AI 블로그 — CLAUDE.md (Claude Code)
+# obangti IT/AI 블로그 — AGENTS.md (Codex)
 
-> Claude Code 진입 문서. Codex는 `AGENTS.md`를 사용. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일. 새 규칙은 양쪽 모두 갱신.
-> Claude Code 도구: `Glob`/`Grep` (탐색), `Edit`/`Write` (수정), `WebFetch` / `web_search` (원문·팩트체크), Pencil MCP·Gemini (이미지).
+> Codex 진입 문서. Claude Code는 `CLAUDE.md`를 사용. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일. 새 규칙은 양쪽 모두 갱신.
+> Codex 도구: `rg`/`rg --files` (탐색), `apply_patch` (수정), `web` 도구 (원문·팩트체크), `image_gen` 또는 Canva plugin (이미지).
 > 사용자: 남기철 (코딩 초보, Canva Pro)
 
 ---
@@ -32,8 +32,8 @@
 - 이미 쓴 주제는 건너뜀
 
 ### 4단계 — 소재 확정 후 원문 읽기
-- 공식 발표 원문 `WebFetch`로 직접 읽기
-- 스레드 원문 `WebFetch`로 읽고 핵심 수치·인용 확인
+- 공식 발표 원문은 Codex `web` 도구로 직접 읽기
+- 스레드 원문은 Codex `web` 도구로 읽고 핵심 수치·인용 확인
 
 ---
 
@@ -66,7 +66,7 @@
   4. ⚠️경고 박스, 💡현직쌤 팁 등 시각 요소
   5. 정리 표
 - **섹션 수**: 소제목 5개 내외 (너무 잘게 쪼개면 산만해짐)
-- **팩트체크**: 정보성 글은 `web_search`로 확인 필수
+- **팩트체크**: 정보성 글은 Codex `web` 도구로 확인 필수
 
 ### 네이버 버전
 - 스마트에디터 특성: **iframe ❌, 마크다운 ❌, 색깔 ❌, SVG ❌**
