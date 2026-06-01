@@ -1,7 +1,11 @@
-# obangti IT/AI 블로그 — AGENTS.md (Codex)
+# obangti IT/AI 블로그
 
-> Codex 진입 문서. Claude Code는 `CLAUDE.md`를 사용. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일. 새 규칙은 양쪽 모두 갱신.
-> Codex 도구: `rg`/`rg --files` (탐색), `apply_patch` (수정), `web` 도구 (원문·팩트체크), `image_gen` 또는 Canva plugin (이미지).
+이 파일이 canonical 작업 지침이다. `CLAUDE.md`(Claude Code)와 `AGENTS.md`(Codex)는 같은 파일이다(symlink). Claude Code·Codex 공통.
+
+> 도구: 탐색 — `rg`/`Grep`, 수정 — `apply_patch`/`Edit·Write`, 원문·팩트체크 — `WebFetch`/`web_search` 또는 Codex web 도구, 이미지 — `image_gen`/Canva/Pencil·Gemini.
+> 브랜치 prefix는 사용하는 도구 관례를 따른다 (Claude Code `claude/`, Codex `codex/`).
+> 커밋 트레일러(`Co-Authored-By: Claude…`)는 도구 기본 동작을 따르되 강제하지 않는다. Codex 커밋에는 넣지 않는다.
+> 전역 지침: `~/.claude/CLAUDE.md` / `~/.codex/AGENTS.md`
 > 사용자: 남기철 (코딩 초보, Canva Pro)
 
 ---
@@ -32,8 +36,8 @@
 - 이미 쓴 주제는 건너뜀
 
 ### 4단계 — 소재 확정 후 원문 읽기
-- 공식 발표 원문은 Codex `web` 도구로 직접 읽기
-- 스레드 원문은 Codex `web` 도구로 읽고 핵심 수치·인용 확인
+- 공식 발표 원문 `WebFetch`/`web_search` 또는 Codex web 도구로 직접 읽기
+- 스레드 원문도 같은 도구로 읽고 핵심 수치·인용 확인
 
 ---
 
@@ -66,7 +70,7 @@
   4. ⚠️경고 박스, 💡현직쌤 팁 등 시각 요소
   5. 정리 표
 - **섹션 수**: 소제목 5개 내외 (너무 잘게 쪼개면 산만해짐)
-- **팩트체크**: 정보성 글은 Codex `web` 도구로 확인 필수
+- **팩트체크**: 정보성 글은 `WebFetch`/`web_search` 또는 Codex web 도구로 확인 필수
 
 ### 네이버 버전
 - 스마트에디터 특성: **iframe ❌, 마크다운 ❌, 색깔 ❌, SVG ❌**
@@ -167,7 +171,8 @@
 | tistory_claude_controversy_2026.html | Claude Code 성능 저하 논란 + Anthropic 사과 | 2026-04-25 |
 | tistory_colleague_skill_2026.html | Claude Code colleague 스킬 소개 | 2026-04-25 |
 | images/2026-04-25-002/tistory_mythos_2026.html | Claude Mythos 공개금지 AI + 해킹 유출 사건 | 2026-04-25 |
+| images/2026-04-26-003/tistory_ai_comparison_2026.html | AI 비교 분석 | 2026-04-26 |
 | images/2026-05-01-004/tistory_claude_code_terms_2026.html | Claude Code 처음 시작하는 비개발자 필수 용어 8개 | 2026-05-01 |
 | images/2026-05-02-005/tistory_git_github_2026.html | Git·GitHub 완전 초보 가이드 — 터미널 명령어·기초 용어 총정리 | 2026-05-02 |
 
-*마지막 업데이트: 2026-05-02*
+*마지막 업데이트: 2026-06-02*
